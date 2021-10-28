@@ -31,7 +31,7 @@ class Orders(models.Model):
     address = models.TextField()
     seller = models.CharField(max_length=250, default=None)
     quantity = models.IntegerField(default=1)
-
+    price = models.FloatField(default=10000)
     options = (
         ("pending","pending"),
         ("ordered", "ordered"),
