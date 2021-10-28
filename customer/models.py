@@ -44,6 +44,7 @@ class Orders(models.Model):
     date = models.DateField(auto_now=True)
 
 
+
 class Address(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)

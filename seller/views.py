@@ -251,27 +251,30 @@ class OrderCount(TemplateView):
     template_name = 'ordercount.html'
     model = Orders
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self,**kwargs):
         context = super().get_context_data(**kwargs)
-        count = self.model.objects.filter(status='delivered').count()
+        count = self.model.objects.filter(status='delivered',seller=self.request.user).count()
         context['order_count'] = count
-        context['orders'] = self.model.objects.filter(status='delivered')
+        context['orders'] = self.model.objects.filter(status='delivered',seller=self.request.user)
 
-        shipped = self.model.objects.filter(status='shipped')
+        shipped = self.model.objects.filter(status='shipped',seller=self.request.user)
         context['orders_shipped'] = shipped
         context['orders_shipped_count'] = shipped.count()
 
-        packed = self.model.objects.filter(status='packed')
+        packed = self.model.objects.filter(status='packed',seller=self.request.user)
         context['orders_packed'] = packed
         context['orders_packed_count'] = packed.count()
 
-        ordered = self.model.objects.filter(status='ordered')
+        ordered = self.model.objects.filter(status='ordered',seller=self.request.user)
         context['orders_ordered'] = ordered
         context['orders_ordered_count'] = ordered.count()
 
-        cancelled = self.model.objects.filter(status='cancelled')
+        cancelled = self.model.objects.filter(status='cancelled',seller=self.request.user)
         context['orders_cancelled'] = cancelled
         context['orders_cancelled_count'] = cancelled.count()
 
 
         return context
+
+
+# def
