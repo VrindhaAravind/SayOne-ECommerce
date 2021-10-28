@@ -529,8 +529,8 @@ def charge(request):
             # print(item.product.stock)
         for item in ordered_items:
             item.status = "ordered"
-#             item.save()
-            item.delete()
+            item.save()
+           # item.delete()
         return render(request, 'payment.html', charge)
     return render(request, 'payment.html')
 
@@ -545,8 +545,8 @@ def cash_on_delivery(request):
         # print(item.product.stock)
     for item in ordered_items:
         item.status = "ordered"
-#         item.save()
-        item.delete()
+        item.save()
+        #item.delete()
     return render(request, 'cod.html')
 
 
