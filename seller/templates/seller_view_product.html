@@ -1,0 +1,72 @@
+{%extends 'seller_base.html'%}
+
+{% block content %}
+    <div class="container" style="padding-top:100px;">
+
+            <div class="row mt-5">
+                <div class="col-4"><h2>My Products</h2></div>
+                <div class="col-1">
+
+
+
+                </div>
+                <div class="col-7 text-end">
+                    <a href="{%url 'add_product'%}"><button class="btn btn-success">Add Product</button></a>
+
+                     <a href="{%url 'base'%}"><button class="btn btn-dark">Back to home</button></a>
+                </div>
+            </div>
+
+        <br><br>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Description</th>
+              <th>Images</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Category</th>
+              <th>Brand</th>
+              <th>Ram</th>
+              <th>Storage</th>
+              <th>Color</th>
+              <th>Offer</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for product in products  %}
+            <tr>
+              <td>{{product.product_name}}</td>
+              <td>{{product.description}}</td>
+              <td><img src="{{product.image.url}}" alt="" style="height:200px; width:200px;"></td>
+              <td>{{product.price}}</td>
+              <td>{{product.stock}}</td>
+              <td>{{product.category}}</td>
+              <td>{{product.brand}}</td>
+              <td>{{product.ram}}</td>
+              <td>{{product.storage}}</td>
+              <td>{{product.color}}</td>
+              <td>{{product.offer}}</td>
+
+<!--              <td><form action='edit/'  method='POST' >  {%csrf_token%} <button class="btn btn-info pull-right " name='prod_id'  id={{product.id}} value={{product.id}}>Edit</button></form></td>-->
+                <td colspan="5">
+                    <a href="{%url 'edit_product' product.id%}"><button class="btn btn-dark">Edit</button></a>
+                </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+<script>
+    $(document).ready(function(){
+<!--        alert('HY')-->
+        $(".btn").click(function(){
+<!--            alert($(this).val())-->
+    });
+});
+</script>
+
+{%endblock%}

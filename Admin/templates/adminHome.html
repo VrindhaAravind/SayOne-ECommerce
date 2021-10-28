@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+<div class="container" style="width=100%;margin:0  " >
+    <div style="margin-top:120px">
+        <div class="row " style="align:left">
+            <div class="col-3" style="background:;margin-right:0px; ">
+                <a href="{% url 'seller' %}"><button  type="button" class="btn btn-outline-secondary" style="width:85%" data-toggle="tooltip" title="{{pending}}  new sellers">Sellers <span class="badge badge-danger ml-1" >{{pending}}</span></button></a>
+                <a href="{% url 'sales' %}"><button type="button" class="btn btn-outline-secondary mt-3" style="width:85%">Sales</button></a>
+                <a href="{% url 'all_order_list' %}"><button type="button" class="btn btn-outline-secondary mt-3" style="width:85%">All Orders</button></a>
+
+            </div>
+            <div class="col-9" style="background:; solid;margin-left:0px">
+                <div class="card-deck" style="height:250px">
+
+
+                    <div class="card " style="background-image: linear-gradient(to right, #02aab0, #00cdac);" >
+                          <div class="card-body text-center" >
+                                <h1 style="font-size:35px">{{customers}}<br> <small>Satisfied Customers</small></h1>
+
+
+                          </div>
+                    </div>
+                    <div class="card " style="background-image: linear-gradient(to right, #11998E,#38EF7D);">
+                          <div class="card-body text-center">
+                               <h1 style="font-size:33px">{{orders}} <br><small>Completed Orders</small></h1>
+                          </div>
+                    </div>
+                    <div class="card " style="background-image: linear-gradient(to right, #02AABD, #00CDAC);">
+                          <div class="card-body text-center">
+                                  <h1 style="font-size:35px">{{sellers}}<br> <small>Dedicated Sellers</small></h1>
+                          </div>
+                    </div>
+                    <div class="card " style="background-image: linear-gradient(to right, #02AABD, #00CDAC);">
+                          <div class="card-body text-center">
+                                  <h1 style="font-size:35px">&#8377; {{sales}}<br> <small>In Sales</small></h1>
+                          </div>
+                    </div>
+                  </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
+{% endblock %}

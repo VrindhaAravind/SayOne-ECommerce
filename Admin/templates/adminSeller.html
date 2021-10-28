@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+        <div class="container">
+            <div style="padding-top:120px">
+                <h5>SELLERS TO BE VERIFIED</h5><br>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Seller</th>
+                    <th>Status</th>
+                    <th>Verify</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for p in pending %}
+                    <tr>
+                        <td>{{p.username}}</td>
+                        <td>{{p.status}}</td>
+                        <td><a href="{% url 'seller_verify' p.id %}">Verify</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+                <h5 style="padding-top:100px">VERIFIED SELLERS </h5><br>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Seller</th>
+                    <th>Status</th>
+                    <th></th>
+                    <th>Contact</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for s in sellers %}
+                    <tr>
+                        <td>{{s.username}}</td>
+                        <td>{{s.status}}</td>
+                        <td><a href={% url 'view_seller_prods' s.id %} >View</a></td>
+                        <td><a href=# >Contact</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+    {% endblock %}

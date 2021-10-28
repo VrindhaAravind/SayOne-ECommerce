@@ -1,27 +1,8 @@
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django import forms
-from .models import Seller_Details, Products
-
-
-class RegistrationForm(UserCreationForm):
-    password1 = forms.CharField(max_length=20, widget=forms.PasswordInput(attrs={"class": "form-control"}))
-    password2 = forms.CharField(max_length=20, widget=forms.PasswordInput(attrs={"class": "form-control"}))
-
-    class Meta:
-        model = User
-        fields = ["first_name", "email", "username", "password1", "password2"]
-        widgets = {
-            "first_name": forms.TextInput(attrs={"class": "form-control"}),
-            "last_name": forms.TextInput(attrs={"class": "form-control"}),
-            "email": forms.EmailInput(attrs={"class": "form-control"}),
-            "username": forms.TextInput(attrs={"class": "form-control"}),
-        }
-
-
-class LoginForm(forms.Form):
-    username = forms.CharField(max_length=30, widget=forms.TextInput(attrs={"class": "form-control"}))
-    password = forms.CharField(max_length=20, widget=forms.PasswordInput(attrs={"class": "form-control"}))
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from .models import Seller_Details, Products, ProductImage, Brand
+from customer.models import Orders
 
 
 class UserForm(UserCreationForm):
@@ -53,11 +34,29 @@ class ProfileForm(forms.ModelForm):
                                          attrs={'class': 'form-control', 'placeholder': 'Enter Account-Number'})))
     ifsc_code = forms.CharField(max_length=15,
                                 widget=(
-                                    forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter IDSC Code'})))
+                                    forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter IFSC Code'})))
 
     class Meta:
         model = Seller_Details
         fields = ['address', 'bank_name', 'account_number', 'ifsc_code']
+
+
+class ProfileUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ["username", "email"]
+        widgets = {
+            "username": forms.TextInput(attrs={"class": "form-control"}),
+            "email": forms.EmailInput(attrs={"class": "form-control"}),
+
+        }
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=15, label="", widget=(
+        forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Username'})))
+    password = forms.CharField(label="",
+                               widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
 
 
 class ProductAddForm(forms.ModelForm):
@@ -71,26 +70,59 @@ class ProductAddForm(forms.ModelForm):
             ('tablet', 'Tablet')
         ]
 
-        brand_names = [
-            ('apple', 'Apple'),
-            ('samsung', 'Samsung'),
-            ('oneplus', 'OnePlus'),
-            ('redmi', 'Redmi'),
-            ('oppo', 'OPPO'),
-            ('lenovo', 'Lenovo')
-
-        ]
+        # brand_names = [
+        #     ('apple','Apple'),
+        #     ('samsung', 'Samsung'),
+        #     ('oneplus', 'OnePlus'),
+        #     ('redmi','Redmi'),
+        #     ('oppo', 'OPPO'),
+        #     ('lenovo', 'Lenovo'),
+        #     ('hp', 'HP'),
+        #     ('dell', 'Dell'),
+        #     ('azus', 'Azus'),
+        #     
+        #     
+        # ]
 
         widgets = {
-            'product_name': forms.TextInput(attrs={'class': 'from-control'}),
-            'category': forms.Select(choices=category_options),
-            'brand': forms.Select(choices=brand_names, attrs={'class': 'from-control'}),
+            'product_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'category': forms.Select(choices=category_options, attrs={'class': 'form-control'}),
+            'brand': forms.Select(attrs={'class':'form-control'}),
 
-            'description': forms.TextInput(attrs={'class': 'from-control'}),
-            'price': forms.NumberInput(attrs={'class': 'from-control'}),
-            'stock': forms.NumberInput(attrs={'class': 'from-control'}),
-            'ram': forms.TextInput(attrs={'class': 'from-control'}),
-            'storage': forms.TextInput(attrs={'class': 'from-control'}),
-            'color': forms.TextInput(attrs={'class': 'from-control'}),
-            'offer': forms.NumberInput(attrs={'class': 'from-control'})
+            'description': forms.TextInput(attrs={'class': 'form-control'}),
+            'price': forms.NumberInput(attrs={'class': 'form-control'}),
+            'stock': forms.NumberInput(attrs={'class': 'form-control'}),
+            'ram': forms.TextInput(attrs={'class': 'form-control'}),
+            'storage': forms.TextInput(attrs={'class': 'form-control'}),
+            'color': forms.TextInput(attrs={'class': 'form-control'}),
+            'offer': forms.NumberInput(attrs={'class': 'form-control'})
+        }
+
+        labels = {
+            'product_name': 'Product Name'
+        }
+
+
+class UpdateOrderForm(forms.ModelForm):
+    class Meta:
+        model = Orders
+        fields = ['status']
+
+
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = ProductImage
+        exclude = ('product',)
+
+        widgets = {
+            'images': forms.FileInput(attrs={'multiple': True})
+        }
+
+
+class BrandCreationForm(forms.ModelForm):
+    class Meta:
+        model = Brand
+        fields = "__all__"
+        widgets = {
+            'brand_name': forms.TextInput(attrs={'class': 'form-control'})
         }

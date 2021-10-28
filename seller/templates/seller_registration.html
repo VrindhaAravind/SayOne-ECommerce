@@ -7,21 +7,21 @@
 
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="container mt-5 ">
         <div class="row mt-5">
-            <div class="col-4 col-sm-3"></div>
-            <div class="col-4 col-sm-6">
-                <form action="" method="post" class="form-control">
+            <div class="col-4 "></div>
+            <div class="col-4  text-center">
+                <form action="" method="post" class="form-control ">
                     {%csrf_token%}
-                    <table>{{user_form.as_table}}{{profile_form.as_table}}</table>
-                    <div class="container text-center mt-3"><input type="submit" value="Register" class="btn btn-warning " ></div>
+                    <table class="mx-auto">{{user_form.as_table}}{{profile_form.as_table}}</table>
+                    <div class="container text-center mt-3"><input type="submit" value="Register" class="btn btn-warning w-50" ></div>
 
                     <div class="container text-center mt-3">
                         <p>Already registered?<a href="{%url 'seller_login'%}">SignIn</a></p>
                     </div>
                 </form>
             </div>
-            <div class="col-4 col-sm-3"></div>
+            <div class="col-4 "></div>
         </div>
     </div>
 </body>

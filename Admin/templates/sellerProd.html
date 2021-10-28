@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+
+    <div class="container  " style="padding-top:100px;">
+        <h2 style="padding-bottom:30px">Seller Details :</h2>
+        <form action="#">
+            <div class="form-group row">
+                <label for="name" class="col-2"> Name :</label>
+                <input type="text" class="form-control col-5" id="name"  name="email" value={{details.username}} style="text-align:center" readonly>
+            </div>
+            <div class="form-group row">
+              <label for="name" class="col-2"> Address :</label>
+              <textarea rows="3" class="form-control col-5" id="pwd" placeholder="Enter password" name="pswd" style="text-align:center"  readonly>{{details.address}}</textarea>
+            </div>
+            <div class="form-group row">
+                <label for="name" class="col-2">Bank :</label>
+                <input type="text" class="form-control col-5" id="bank"  name="email" value={{details.bank_name}} style="text-align:center" readonly>
+            </div>
+
+        </form>
+    </div>
+    <div class="container" style="padding-top:50px">
+        <h2 style="padding-bottom:30px">Products :</h2>
+        <table class="table table-bordered">
+          <thead style="background-color:	#A0A0A0">
+            <tr>
+              <th>Product Name</th>
+              <th>Description</th>
+              <th>Images</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Category</th>
+              <th>Brand</th>
+              <th>Ram</th>
+              <th>Storage</th>
+              <th>Color</th>
+              <th>Offer</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for product in products  %}
+            <tr>
+              <td>{{product.product_name}}</td>
+              <td>{{product.description}}</td>
+              <td><img src="{{product.image.url}}" alt="" style="height:80px; width:75px;"></td>
+              <td>{{product.price}}</td>
+              <td>{{product.stock}}</td>
+              <td>{{product.category}}</td>
+              <td>{{product.brand}}</td>
+              <td>{{product.ram}}</td>
+              <td>{{product.storage}}</td>
+              <td>{{product.color}}</td>
+              <td>{{product.offer}}</td>
+
+<!--              <td><form action='edit/'  method='POST' >  {%csrf_token%} <button class="btn btn-info pull-right " name='prod_id'  id={{product.id}} value={{product.id}}>Edit</button></form></td>-->
+
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    {% endblock %}

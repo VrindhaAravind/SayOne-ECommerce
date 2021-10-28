@@ -1,0 +1,21 @@
+{% extends 'seller_base.html'%}
+{%block content%}
+<div class="container" style="padding-top:100px;">
+    <div class="row mt-5">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <h3>Edit Profile</h3>
+            <form action="" method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+                {{user_form.as_p}}
+                {{profile_form.as_p}}
+                <div class="text-center">
+                                    <input class="btn btn-success" type="submit" value="Update Profile" href="{% url 'seller_profile'%}">
+
+                </div>
+            </form>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
+{%endblock%}

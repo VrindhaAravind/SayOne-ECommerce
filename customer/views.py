@@ -44,7 +44,7 @@ class SignInView(TemplateView):
             user = authenticate(request, username=username, password=password)
             if user:
                 login(request, user)
-                messages.success(request, "Login Successful")
+                # messages.success(request, "Login Successful")
                 return redirect("customer_home")
             else:
                 messages.error(request, 'Username or Password is incorrect')

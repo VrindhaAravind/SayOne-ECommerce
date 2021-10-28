@@ -1,0 +1,28 @@
+{%extends 'seller_base.html'%}
+
+{% block content %}
+    <div class="container mt-5 " style="padding-top:100px;">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <form action="" method="post" class="">
+                {%csrf_token%}
+                <table class="mx-auto">
+                    {{form.as_table}}
+                </table>
+
+                <div class=" mt-2 text-center">
+                    <button type="submit" class="btn btn-success">Update</button>
+                </div>
+            </form>
+            </div>
+            <div class="col-4">
+                <div class="col-4">
+                <div class="text-center">
+                    <a href="{%url 'brand_list'%}" class="btn btn-info ">View Brands</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}

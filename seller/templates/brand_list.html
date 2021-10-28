@@ -1,0 +1,46 @@
+{%extends 'seller_base.html'%}
+
+{% block content %}
+<div class="container mt-5" style="padding-top:100px;">
+    <div class="row">
+        <div class="col-4">
+            <div>
+                <a href="{%url 'add_brand'%}" class="btn btn-primary">Add Brand</a>
+            </div>
+        </div>
+        <div class="col-4">
+            <table class="table table-borderless mt-5">
+                <tr>
+                    <th>Brand Name</th>
+
+                    <th>Actions</th>
+                </tr>
+                {%if brands%}
+                    {%for brand in brands%}
+                        <tr>
+                            <td>{{brand.brand_name}}</td>
+                            <td>
+                                <a href="{%url 'update' brand.id%}" class="btn btn-warning">Edit</a>
+                                <a href="{%url 'remove' brand.id %}" class="btn btn-danger">Delete</a>
+
+
+                            </td>
+                        </tr>
+                    {%endfor%}
+                {%else%}
+                    <tr>
+                        <td colspan="5">
+                            <h3>No brands found!!</h3>
+                        </td>
+                    </tr>
+                {%endif%}
+            </table>
+        </div>
+        <div class="col-4">
+            <div class="text-end">
+                <a href="{%url 'base'%}" class="btn btn-dark">Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

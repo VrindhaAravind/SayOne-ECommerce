@@ -13,10 +13,18 @@ class Brand(models.Model):
 
 class Seller_Details(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.CharField(max_length=100)
     address = models.TextField()
     bank_name = models.CharField(max_length=100)
     account_number = models.IntegerField()
     ifsc_code = models.CharField(max_length=20)
+    options = (("approved", "approved"),
+               ("pending", "pending"),
+               )
+    status = models.CharField(max_length=100, choices=options, default='pending')
+
+    def __str__(self):
+        return self.username
 
 
 class Products(models.Model):
@@ -27,7 +35,7 @@ class Products(models.Model):
     price = models.FloatField()
     stock = models.IntegerField()
     category = models.CharField(max_length=50)
-    brand = models.CharField(max_length=50)
+    brand = models.ForeignKey(Brand,on_delete=models.CASCADE,null=True)
     ram = models.CharField(max_length=50)
     storage = models.CharField(max_length=50)
     color = models.CharField(max_length=50)
@@ -35,3 +43,10 @@ class Products(models.Model):
 
     def __str__(self):
         return self.product_name
+    
+class ProductImage(models.Model):
+    product = models.ForeignKey(Products,default=None,on_delete=models.CASCADE)
+    images = models.FileField(upload_to='images')
+
+    def __str__(self):
+        return self.product.product_name

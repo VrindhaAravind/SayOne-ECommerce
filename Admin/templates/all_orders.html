@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+    {% block content %}
+<div class="container-fluid text-white">
+
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <h2 class="text-center mt-5">Available Brands</h2>
+                <table class="table text-dark mt-5">
+                    <tr>
+                        <th>Product</th>
+
+                        <th>Address</th>
+                        <th>Status</th>
+                        <th>Customer</th>
+                        <th>Seller</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+
+                    </tr>
+                    {%if all_orders%}
+                    {%for order in all_orders%}
+                    <tr>
+                        <td>{{order.product.product_name}}</td>
+                        <td>{{order.address}}</td>
+                         <td>{{order.status}}</td>
+                        <td>{{order.user}}</td>
+                        <td>{{order.seller}}</td>
+                        <td>{{order.quantity}}</td>
+                        <td>Rs.{% widthratio order.quantity 1 order.product.price%}</td>
+
+
+                    </tr>
+                    {%endfor%}
+                    {%else%}
+                        <tr>
+                            <td colspan="5">
+                                <h3>
+                                    No Orders found!!
+                                </h3>
+                            </td>
+                        </tr>
+                    {%endif%}
+                </table>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+{%endblock%}
