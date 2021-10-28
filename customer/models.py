@@ -40,7 +40,7 @@ class Orders(models.Model):
         ("delivered", "delivered"),
         ("cancelled", "cancelled")
     )
-    status = models.CharField(max_length=120, choices=options, default="ordered")
+    status = models.CharField(max_length=120, choices=options, default="pending")
     date = models.DateField(auto_now=True)
 
 
