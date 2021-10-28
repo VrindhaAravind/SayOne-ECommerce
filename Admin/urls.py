@@ -10,7 +10,7 @@ from .views import (
                 view_seller_prod,
                 sales,
                 sellerorder,
-
+                edit_seller,
                 logout_admin,
                 OrderList
 )
@@ -23,5 +23,6 @@ urlpatterns = [
         path('seller/<int:sid>/products', login_required(view_seller_prod,login_url='adminlogin'), name='view_seller_prods'),
         path('sales/',login_required( sales,login_url='adminlogin'), name='sales'),
         path('saller/order/',login_required( sellerorder,login_url='adminlogin'), name='sellerorder'),
-        path('logout/', login_required(logout_admin,login_url='adminlogin'), name='logouthtml')
+        path('logout/', login_required(logout_admin,login_url='adminlogin'), name='logouthtml'),
+        path('editsellerstatus/<int:sid>',edit_seller,name='editseller'),
 ]
