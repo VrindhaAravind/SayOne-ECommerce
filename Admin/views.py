@@ -131,3 +131,21 @@ def logout_admin(request):
         return redirect('adminlogin')
     else:
         return redirect('adminlogin')
+    
+    
+def edit_seller(request, *args, **kwargs):
+    data=Seller_Details.objects.get(id=kwargs.get('sid'))
+
+
+    if request.method=='POST':
+
+        x=Seller_Details.objects.get(id=kwargs.get('sid'))
+
+        x.status='pending'
+        x.save()
+
+        pending = Seller_Details.objects.filter(status='pending')
+        sellers = Seller_Details.objects.filter(status='approved')
+        return render(request, 'adminSeller.html', {'pending': pending, 'sellers': sellers})
+
+    return render(request,'selleredit.html',{'seller':data})
