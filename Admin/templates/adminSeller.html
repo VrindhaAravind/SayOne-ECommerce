@@ -37,8 +37,8 @@
                     <tr>
                         <td>{{s.username}}</td>
                         <td>{{s.status}}</td>
-                        <td><a href={% url 'view_seller_prods' s.id %} >View</a></td>
-                        <td><a href=# >Contact</a></td>
+                        <td><a href="{% url 'view_seller_prods' s.id %}" >View</a></td>
+                        <td><a href="{% url 'editseller' s.id %}" >Edit</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>

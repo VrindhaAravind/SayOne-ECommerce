@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+
+    <div class="container"  style="padding-top:100px;">
+
+        <form action="{% url 'editseller' seller.id %}" id="form" method="POST">
+            {%csrf_token%}
+            <div id="verify">
+                <div class="form-group" >
+                    <label for="username">Seller name:</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter email" name="username" value={{seller.username}} style="width:60%" readonly>
+
+
+                </div>
+                 <div class="form-group">
+                    <label for="username">Address:</label>
+                    <textarea rows="3" class="form-control" id="Address" placeholder="Enter email" name="username"  style="width:60%" readonly>{{seller.address}}</textarea>
+
+
+                </div>
+                <div class="form-group">
+                    <label for="username">Bank Name:</label>
+                    <input type="text" rows="3" class="form-control" id="Address" placeholder="Enter email" name="username" value={{seller.bank_name}} style="width:60%" readonly>
+
+
+                </div>
+                <div class="form-group">
+                    <label for="username">Account No.:</label>
+                    <input type="text" rows="3" class="form-control" id="Address" placeholder="Enter email" name="username" value={{seller.account_number}} style="width:60%" readonly>
+
+
+                </div>
+                <div class="form-group ">
+                    <label for="username">IFSC Code:</label>
+                    <input type="text" rows="3" class="form-control" id="Address" placeholder="Enter email" name="username" value={{seller.ifsc_code}} style="width:60%" readonly>
+
+
+                </div>
+
+                <a><button type="submit" class="btn btn-danger">Submit</button></a>
+            </div>
+        </form>
+
+    </div>
+
+
+    {% endblock %}
