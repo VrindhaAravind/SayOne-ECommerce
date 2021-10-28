@@ -162,7 +162,7 @@ class EditDetails(TemplateView):
             details = None
         user_form = UserForm(post_data, instance=request.user)
         profile_form = UpdateForm(post_data, file_data, instance=details)
-        # profile_form = UpdateForm(post_data, file_data, instance=request.user.profile)
+        brands=Brand.objects.all()
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
@@ -170,7 +170,7 @@ class EditDetails(TemplateView):
             profile.user = request.user
             profile.save()
             return HttpResponseRedirect(reverse_lazy('view_profile'))
-        context = self.get_context_data(user_form=user_form, profile_form=profile_form)
+        context = self.get_context_data(user_form=user_form, profile_form=profile_form,brands=brands)
 
         return self.render_to_response(context)
 
@@ -298,6 +298,8 @@ class WriteReview(TemplateView):
 
     def get(self, request, *args, **kwargs):
         form = ReviewForm()
+        brands = Brand.objects.all()
+        self.context['brands'] = brands
         self.context['form'] = form
         return render(request, self.template_name, self.context)
 
@@ -429,6 +431,7 @@ def summery(request, *args, **kwargs):
             order.seller = Products.objects.get(id=i.product.id).user
             order.address = ad
             order.quantity = i.quantity
+            order.price = (i.product.price) * (i.quantity)
             order.save()
             print(order.date)
             print("saved")
@@ -446,7 +449,7 @@ def summery(request, *args, **kwargs):
         content['name'] = product.product_name.capitalize()
         content['color'] = product.color
         content['seller'] = product.user
-        content['price'] = product.price
+        content['price'] = product.price*i.quantity
         content['offer'] = product.offer
         content['quantity'] = i.quantity
         sum += (product.price * i.quantity)
