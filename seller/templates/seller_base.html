@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+        <h1>WELCOME {{user.first_name.capitalize}}</h1>
+        <a href="{%url 'add_product'%}"><button>Add Product</button></a>
+        <a href="{%url 'seller_logout'%}"><button>Logout</button></a>
+</body>
+</html>

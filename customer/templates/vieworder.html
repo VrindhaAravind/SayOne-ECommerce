@@ -1,0 +1,61 @@
+{% extends 'cust_base.html'%}
+{%block body_block%}
+<div class="container" style="padding-top:100px">
+    <h3 style="padding-bottom:30px">Orders</h3>
+        {% for o in orders %}
+           <table class="table table-borderless">
+               <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td style="width:300px"><img src={{o.product.image.url}} height="120px" width="120px"></td>
+                            <td width="300px">
+                                <b>{{o.product.product_name}}</b>
+                                <p class="pt-3" style="font-size:14px;color:grey">Color:{{o.product.color}}</p>
+                                <p class="pt" style="font-size:14px;color:grey">Seller:{{o.seller}}</p>
+                            </td>
+                            <td width="300px">
+                                Price :<b>{{o.product.price}}</b><br>
+
+                                Qty: <b>{{o.quantity}} </b> (nos.)
+                                <p class="pt-2" style="font-size:14px;color:grey">Ordered on: <span style="color:green ;font-weight:bold">{{o.date}}</span></p>
+                            </td>
+                            <td width="300px"  >
+                                <b  class="status" data-id={{o.id}}>{{o.status}}</b>
+                                <a id=return{{o.id}} style='text-decoration:none; display:none' class="pl-3" href='#'><button type='button' class='btn btn-outline-danger'>Return Order</button></a>
+                                {% if o.status == 'ordered'%}
+                                <a id=cancel{{o.id}} style='text-decoration:none; display:none' class="pl-3" href="{%url 'removeorder' o.id%}"><button type='button' class='btn btn-outline-danger'>Cancel Order</button></a>
+                                {%endif%}
+                                <div class="pt-2" id=eta{{o.id}} > </div>
+                            </td>
+
+                        </tr>
+                    </tbody>
+               </table>
+           </table>
+        {% endfor %}
+
+    </div>
+<script>
+$(document).ready(function(){
+<!--    alert('hy1')-->
+       $(".status").each(function(){
+<!--            alert($(this).text())-->
+            let x=$(this).data('id')
+            let z=$(this).text()
+<!--            alert(z.length)-->
+            if(z == 'delivered')
+            {
+<!--                alert('delivered inside' )-->
+                 $("#return"+x).show()
+                 document.getElementById("eta"+x).innerHTML = 'Product Delivered on: xx/xx/xxxx';
+            }
+            else
+            {
+<!--                alert('hello')-->
+                $("#cancel"+x).show()
+                document.getElementById("eta"+x).innerHTML = 'Estimated Delivered on: xx/xx/xxxx';
+            }
+       });
+});
+</script>
+{%endblock%}

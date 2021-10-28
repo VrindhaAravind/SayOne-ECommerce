@@ -1,0 +1,28 @@
+{%extends 'homepage.html' %}
+{%block body_block%}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-3"></div>
+        <div style="margin-top:20px;" class="col-6">
+
+            <div class="card">
+                <div class="card-body">
+                    <span class="text-muted" style="font-size:10px;">{{service.date}}</span> <br>
+                    Subject: {{service.subject}} <br>
+                    Message: {{service.message}} <br>
+                    {% if service.response %}
+                    Response: {{service.response}}
+                    {% else %}
+                    Waiting for response.
+                    {% endif %}
+                </div>
+            </div>
+            <a class="btn btn-primary mt-5" href="{%url 'customerservice' %}"> Back</a></button>
+            <a class="btn btn-secondary mt-5" href="{%url 'customer_home' %}" >Proceed to Home</a></button>
+
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
+
+{%endblock%}
