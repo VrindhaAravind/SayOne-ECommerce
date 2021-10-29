@@ -189,7 +189,7 @@ class ViewDetails(TemplateView):
             return render(request, self.template_name, self.context)
 
         except Userdetails.DoesNotExist:
-            return redirect("customer_edit")
+            return redirect("editprofile")
 
 
 @method_decorator(signin_required, name="dispatch")
